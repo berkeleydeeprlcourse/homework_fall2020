@@ -50,7 +50,7 @@ You can visualize your runs using tensorboard:
 tensorboard --logdir cs285/data
 ```
 
-You will see scalar summaries as well as videos of your trained policy (in the 'images' tab).
+You will see scalar summaries as well as videos of your trained policies (in the 'images' tab).
 
 If running on Colab, you will be using the `%tensorboard` [line magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html) to do the same thing; see the [notebook](cs285/scripts/run_hw1.ipynb) for more details.
 
