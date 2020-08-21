@@ -21,7 +21,7 @@ export LD_LIBRARY_PATH=~/.mujoco/mujoco200/bin/
 
 There are two options:
 
-A) (Recommended) Install with conda:
+A. (Recommended) Install with conda:
 
 	1. Install conda, if you don't already have it, by following the instructions at [this link](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)
 
@@ -54,7 +54,7 @@ A) (Recommended) Install with conda:
 This conda environment requires activating it every time you open a new terminal (in order to run code), but the benefit is that the required dependencies for this codebase will not affect existing/other versions of things on your computer. This stand-alone environment will have everything that is necessary.
 
 
-B) Install on system Python:
-```
-pip install -r requirements.txt
-```
+B. Install on system Python:
+	```
+	pip install -r requirements.txt
+	```
