@@ -5,19 +5,19 @@ You may run this code on our own machine or on Google Colab.
 1. Run on your machine: If you choose to run locally, you will need to install MuJoco and some Python packages; see (installation.md)[installation.md] for instructions.
 2. Colab: The first few sections of the notebook will install all required dependencies. You can try out the Colab option by clicking the badge below:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](cs285/scripts/run_hw1.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jannerm/homework_fall2020/hw1/cs285/scripts/run_hw1.ipynb)
 
 ## Complete the code
 
 Fill in sections marked with `TODO`
 The following files have `TODO` markers in them:
-- scripts/run_hw1_behavior_cloning.py
-- infrastructure/rl_trainer.py
-- agents/bc_agent.py
-- policies/MLP_policy.py
-- infrastructure/replay_buffer.py
-- infrastructure/utils.py
-- infrastructure/tf_utils.py
+1. [scripts/run_hw1_behavior_cloning.py](cs285/scripts/run_hw1_behavior_cloning.py)
+2. infrastructure/rl_trainer.py
+3. agents/bc_agent.py
+4. policies/MLP_policy.py
+5. infrastructure/replay_buffer.py
+6. infrastructure/utils.py
+7. infrastructure/tf_utils.py
 
 See the homework pdf for more details.
 
