@@ -5,7 +5,7 @@ You may run this code on our own machine or on Google Colab.
 1. Run on your machine: If you choose to run locally, you will need to install MuJoco and some Python packages; see (installation.md)[installation.md] for instructions.
 2. Colab: The first few sections of the notebook will install all required dependencies. You can try out the Colab option by clicking the badge below:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jannerm/homework_fall2020/hw1/cs285/scripts/run_hw1.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jannerm/homework_fall2020/blob/master/hw1/cs285/scripts/run_hw1.ipynb)
 
 ## Complete the code
 
