@@ -54,51 +54,7 @@ A) (Recommended) Install with conda:
 This conda environment requires activating it every time you open a new terminal (in order to run code), but the benefit is that the required dependencies for this codebase will not affect existing/other versions of things on your computer. This stand-alone environment will have everything that is necessary.
 
 
-B) Install locally:
+B) Install on system Python:
 ```
 pip install -r requirements.txt
 ```
-
-## Complete the code
-
-Blanks to be filled in are marked with "TODO"
-The following files have blanks in them:
-- scripts/run_hw1_behavior_cloning.py
-- infrastructure/rl_trainer.py
-- agents/bc_agent.py
-- policies/MLP_policy.py
-- infrastructure/replay_buffer.py
-- infrastructure/utils.py
-- infrastructure/tf_utils.py
-
-See the code and homework pdf for more details.
-
-## Run the code
-
-Run the following command for Section 1 (Behavior Cloning):
-
-```
-python cs285/scripts/run_hw1_behavior_cloning.py \
-	--expert_policy_file cs285/policies/experts/Ant.pkl \
-	--env_name Ant-v2 --exp_name test_bc_ant --n_iter 1 \
-	--expert_data cs285/expert_data/expert_data_Ant-v2.pkl
-```
-
-Run the following command for Section 2 (DAgger):
-(Note the `--do_dagger` flag, and the higher value for `n_iter`)
-
-```
-python cs285/scripts/run_hw1_behavior_cloning.py \
-	--expert_policy_file cs285/policies/experts/Ant.pkl \
-	--env_name Ant-v2 --exp_name test_dagger_ant --n_iter 10 \
-	--do_dagger --expert_data cs285/expert_data/expert_data_Ant-v2.pkl
-```
-
-## Visualize the saved tensorboard event file:
-
-```
-cd cs285/data/<your_log_dir>
-tensorboard --logdir .
-```
-
-Then, navigate to shown url to see scalar summaries as plots (in 'scalar' tab), as well as videos (in 'images' tab)
