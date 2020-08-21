@@ -9,9 +9,8 @@ You may run this code on our own machine or on Google Colab.
 
 ## Complete the code
 
-Fill in sections marked with `TODO`
-The following files have `TODO` markers in them:
-1. [scripts/run_hw1_behavior_cloning.py](cs285/scripts/run_hw1_behavior_cloning.py)
+Fill in sections marked with `TODO`. You will be focusing most of your attention on the following files:
+1. [scripts/run_hw1.py](cs285/scripts/run_hw1.py) (if running locally) or [scripts/run_hw1.ipynb](cs285/scripts/run_hw1.ipynb) (if running on Colab)
 2. infrastructure/rl_trainer.py
 3. agents/bc_agent.py
 4. policies/MLP_policy.py
