@@ -16,7 +16,7 @@ Fill in sections marked with `TODO`. You will be focusing most of your attention
 4. [policies/MLP_policy.py](cs285/policies/MLP_policy.py)
 5. [infrastructure/replay_buffer.py](cs285/infrastructure/replay_buffer.py)
 6. [infrastructure/utils.py](cs285/infrastructure/utils.py)
-7. [infrastructure/tf_utils.py](cs285/infrastructure/tf_utils.py)
+7. [infrastructure/pytorch_utils.py](cs285/infrastructure/pytorch_utils.py)
 
 See the homework pdf for more details.
 
