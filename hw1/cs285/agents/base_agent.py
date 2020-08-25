@@ -1,3 +1,5 @@
+import numpy as np
+import tensorflow as tf
 
 class BaseAgent(object):
     def __init__(self, **kwargs):
@@ -10,7 +12,4 @@ class BaseAgent(object):
         raise NotImplementedError
 
     def sample(self, batch_size):
-        raise NotImplementedError
-
-    def save(self, path):
         raise NotImplementedError

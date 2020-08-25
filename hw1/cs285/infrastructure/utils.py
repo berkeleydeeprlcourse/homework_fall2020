@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import scipy
 
 ############################################
 ############################################
@@ -39,12 +40,12 @@ def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('
         next_obs.append(ob)
         rewards.append(rew)
 
-        # TODO end the rollout if the rollout ended
+        # TODO end the rollout if the rollout ended 
         # HINT: rollout can end due to done, or due to max_path_length
         rollout_done = TODO # HINT: this is either 0 or 1
         terminals.append(rollout_done)
-
-        if rollout_done:
+        
+        if rollout_done: 
             break
 
     return Path(obs, image_obs, acs, rewards, next_obs, terminals)
@@ -61,7 +62,7 @@ def sample_trajectories(env, policy, min_timesteps_per_batch, max_path_length, r
     paths = []
     while timesteps_this_batch < min_timesteps_per_batch:
 
-        TODO
+        TODO 
 
     return paths, timesteps_this_batch
 

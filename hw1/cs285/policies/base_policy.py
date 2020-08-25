@@ -1,13 +1,21 @@
-import abc
 import numpy as np
 
+class BasePolicy(object):
 
-class BasePolicy(object, metaclass=abc.ABCMeta):
-    def get_action(self, obs: np.ndarray) -> np.ndarray:
+    def __init__(self, **kwargs):
+       super(BasePolicy, self).__init__(**kwargs)
+
+    def build_graph(self):
         raise NotImplementedError
 
-    def update(self, obs: np.ndarray, acs: np.ndarray, **kwargs):
+    def get_action(self, obs):
         raise NotImplementedError
 
-    def save(self, filepath: str):
+    def update(self, obs, acs):
         raise NotImplementedError
+
+    def save(self, filepath):
+    	raise NotImplementedError
+
+    def restore(self, filepath):
+    	raise NotImplementedError
