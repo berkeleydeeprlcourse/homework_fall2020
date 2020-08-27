@@ -5,22 +5,27 @@ You can run this code on your own machine or on Google Colab.
 1. **Local option:** If you choose to run locally, you will need to install MuJoCo and some Python packages; see [installation.md](installation.md) for instructions.
 2. **Colab:** The first few sections of the notebook will install all required dependencies. You can try out the Colab option by clicking the badge below:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/berkeleydeeprlcourse/homework_fall2020/blob/master/hw1/cs285/scripts/run_hw1.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/berkeleydeeprlcourse/homework_fall2020/blob/pytorch/hw1/cs285/scripts/run_hw1.ipynb)
 
 ## Complete the code
 
-Fill in sections marked with `TODO`. You will be focusing most of your attention on the following files:
-1. [scripts/run_hw1.py](cs285/scripts/run_hw1.py) (if running locally) or [scripts/run_hw1.ipynb](cs285/scripts/run_hw1.ipynb) (if running on Colab)
-2. [infrastructure/rl_trainer.py](cs285/infrastructure/rl_trainer.py)
-3. [agents/bc_agent.py](cs285/agents/bc_agent.py)
-4. [policies/MLP_policy.py](cs285/policies/MLP_policy.py)
-5. [infrastructure/replay_buffer.py](cs285/infrastructure/replay_buffer.py)
-6. [infrastructure/utils.py](cs285/infrastructure/utils.py)
-7. [infrastructure/pytorch_utils.py](cs285/infrastructure/pytorch_utils.py)
+Fill in sections marked with `TODO`. In particular, see
+ - [infrastructure/rl_trainer.py](cs285/infrastructure/rl_trainer.py)
+ - [policies/MLP_policy.py](cs285/policies/MLP_policy.py)
+ - [infrastructure/replay_buffer.py](cs285/infrastructure/replay_buffer.py)
+ - [infrastructure/utils.py](cs285/infrastructure/utils.py)
+ - [infrastructure/pytorch_utils.py](cs285/infrastructure/pytorch_utils.py)
+
+Look for sections maked with `HW1` to see how the edits you make will be used.
+Some other files that you may find relevant
+ - [scripts/run_hw1.py](cs285/scripts/run_hw1.py) (if running locally) or [scripts/run_hw1.ipynb](cs285/scripts/run_hw1.ipynb) (if running on Colab)
+ - [agents/bc_agent.py](cs285/agents/bc_agent.py)
 
 See the homework pdf for more details.
 
 ## Run the code
+
+Tip: While debugging, you probably want to pass the flag `--video_log_freq -1` which will disable video logging and speed up the experiment.
 
 Run the following command for Section 1 (Behavior Cloning):
 

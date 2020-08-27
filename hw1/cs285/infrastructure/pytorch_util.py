@@ -1,13 +1,9 @@
-from typing import Union, Optional
+from typing import Union
 import torch
 import numpy as np
 from torch import nn
 
 Activation = Union[str, nn.Module]
-
-
-def _identity(x):
-    return x
 
 
 _str_to_activation = {
@@ -17,6 +13,7 @@ _str_to_activation = {
     'sigmoid': nn.Sigmoid(),
     'selu': nn.SELU(),
     'softplus': nn.Softplus(),
+    'identity': nn.Identity(),
 }
 
 
@@ -26,7 +23,7 @@ def build_mlp(
         n_layers: int,
         size: int,
         activation: Activation = 'tanh',
-        output_activation: Optional[Activation] = None,
+        output_activation: Activation = 'identity',
 ):
     """
         Builds a feedforward neural network
@@ -51,6 +48,7 @@ def build_mlp(
     if isinstance(output_activation, str):
         output_activation = _str_to_activation[output_activation]
     # TODO: return a MLP. This should be an instance of nn.Module
+    # Note: nn.Sequential is an instance of nn.Module.
     raise NotImplementedError
 
 

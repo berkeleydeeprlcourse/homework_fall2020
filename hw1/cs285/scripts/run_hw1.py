@@ -21,14 +21,14 @@ class BC_Trainer(object):
             }
 
         self.params = params
-        self.params['agent_class'] = BCAgent ## TODO: look in here and implement this
+        self.params['agent_class'] = BCAgent ## HW1: you will modify this
         self.params['agent_params'] = agent_params
 
         ################
         ## RL TRAINER
         ################
 
-        self.rl_trainer = RL_Trainer(self.params) ## TODO: look in here and implement this
+        self.rl_trainer = RL_Trainer(self.params) ## HW1: you will modify this
 
         #######################
         ## LOAD EXPERT POLICY
@@ -65,7 +65,7 @@ def main():
 
     parser.add_argument('--batch_size', type=int, default=1000)  # training data collected (in the env) during each iteration
     parser.add_argument('--eval_batch_size', type=int,
-                        default=200)  # eval data collected (in the env) for logging metrics
+                        default=1000)  # eval data collected (in the env) for logging metrics
     parser.add_argument('--train_batch_size', type=int,
                         default=100)  # number of sampled data points to be used per gradient/train step
 
@@ -78,6 +78,7 @@ def main():
     parser.add_argument('--use_gpu', action='store_true')
     parser.add_argument('--which_gpu', type=int, default=0)
     parser.add_argument('--max_replay_buffer_size', type=int, default=1000000)
+    parser.add_argument('--save_params', action='store_true')
     parser.add_argument('--seed', type=int, default=1)
     args = parser.parse_args()
 

@@ -102,19 +102,19 @@ class RL_Trainer(object):
                 initial_expertdata,
                 collect_policy,
                 self.params['batch_size']
-            )  # TODO implement this function below
+            )  # HW1: implement this function below
             paths, envsteps_this_batch, train_video_paths = training_returns
             self.total_envsteps += envsteps_this_batch
 
             # relabel the collected obs with actions from a provided expert policy
             if relabel_with_expert and itr>=start_relabel_with_expert:
-                paths = self.do_relabel_with_expert(expert_policy, paths)  # TODO implement this function below
+                paths = self.do_relabel_with_expert(expert_policy, paths)  # HW1: implement this function below
 
             # add collected data to replay buffer
             self.agent.add_to_replay_buffer(paths)
 
             # train agent (using sampled data from replay buffer)
-            self.train_agent()  # TODO implement this function below
+            self.train_agent()  # HW1: implement this function below
 
             # log/save
             if self.log_video or self.log_metrics:
@@ -130,7 +130,13 @@ class RL_Trainer(object):
     ####################################
     ####################################
 
-    def collect_training_trajectories(self, itr, load_initial_expertdata, collect_policy, batch_size):
+    def collect_training_trajectories(
+            self,
+            itr,
+            load_initial_expertdata,
+            collect_policy,
+            batch_size,
+    ):
         """
         :param itr:
         :param load_initial_expertdata:  path to expert data pkl file
@@ -148,9 +154,10 @@ class RL_Trainer(object):
                 # load the data. In this case you can directly return as follows
                 # ``` return loaded_paths, 0, None ```
 
-                # collect data, batch_size is the number of transitions you want to collect.
+                # if it's the first iteration and you aren't loading data, then
+                # `self.params['batch_size_initial']` is the number of transitions you want to collect
 
-        # TODO collect data to be used for training
+        # TODO collect `batch_size` to be used for training
         # HINT1: use sample_trajectories from utils
         # HINT2: you want each of these collected rollouts to be of length self.params['ep_len']
         print("\nCollecting data to be used for training...")

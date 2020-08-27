@@ -102,9 +102,5 @@ class MLPPolicySL(MLPPolicy):
     ):
         # TODO: update the policy and return the loss
         loss = TODO
-        return loss
-
-    def forward(self, observation: torch.FloatTensor) -> Any:
-        # TODO: sample actions
-        action = TODO
-        return action
+        # if loss is a torch.Tensor, convert to numpy
+        return loss.detach().numpy()
