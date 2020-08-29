@@ -1,6 +1,6 @@
 from typing import Union
+
 import torch
-import numpy as np
 from torch import nn
 
 Activation = Union[str, nn.Module]
@@ -47,10 +47,31 @@ def build_mlp(
         activation = _str_to_activation[activation]
     if isinstance(output_activation, str):
         output_activation = _str_to_activation[output_activation]
+
     # TODO: return a MLP. This should be an instance of nn.Module
     # Note: nn.Sequential is an instance of nn.Module.
     raise NotImplementedError
 
 
-def from_numpy(array):
-    return torch.from_numpy(array.astype(np.float32))
+device = None
+
+
+def init_gpu(gpu_id=0):
+    global device
+    if torch.cuda.is_available():
+        device = torch.device("cuda:" + str(gpu_id))
+    else:
+        device = torch.device("cpu")
+        print("GPU not detected. Defaulting to CPU.")
+
+
+def set_device(gpu_id):
+    torch.cuda.set_device(gpu_id)
+
+
+def from_numpy(*args, **kwargs):
+    return torch.from_numpy(*args, **kwargs).float().to(device)
+
+
+def to_numpy(tensor):
+    return tensor.to('cpu').detach().numpy()

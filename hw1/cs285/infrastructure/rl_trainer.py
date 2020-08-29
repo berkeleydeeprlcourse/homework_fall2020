@@ -5,12 +5,14 @@ import time
 import gym
 import torch
 
+from cs285.infrastructure import pytorch_util as ptu
 from cs285.infrastructure.logger import Logger
 from cs285.infrastructure import utils
 
 # how many rollouts to save as videos to tensorboard
 MAX_NVIDEO = 2
 MAX_VIDEO_LEN = 40  # we overwrite this in the code below
+
 
 class RL_Trainer(object):
 
@@ -28,6 +30,10 @@ class RL_Trainer(object):
         seed = self.params['seed']
         np.random.seed(seed)
         torch.manual_seed(seed)
+        ptu.init_gpu(
+            use_gpu=not self.params['no_gpu'],
+            gpu_id=self.params['which_gpu']
+        )
 
         #############
         ## ENV
@@ -157,7 +163,7 @@ class RL_Trainer(object):
                 # if it's the first iteration and you aren't loading data, then
                 # `self.params['batch_size_initial']` is the number of transitions you want to collect
 
-        # TODO collect `batch_size` to be used for training
+        # TODO collect `batch_size` samples to be used for training
         # HINT1: use sample_trajectories from utils
         # HINT2: you want each of these collected rollouts to be of length self.params['ep_len']
         print("\nCollecting data to be used for training...")

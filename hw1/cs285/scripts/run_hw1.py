@@ -75,7 +75,7 @@ def main():
 
     parser.add_argument('--video_log_freq', type=int, default=5)
     parser.add_argument('--scalar_log_freq', type=int, default=1)
-    parser.add_argument('--use_gpu', action='store_true')
+    parser.add_argument('--no_gpu', '-ngpu', action='store_true')
     parser.add_argument('--which_gpu', type=int, default=0)
     parser.add_argument('--max_replay_buffer_size', type=int, default=1000000)
     parser.add_argument('--save_params', action='store_true')
