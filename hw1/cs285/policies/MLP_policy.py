@@ -39,10 +39,12 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
         self.nn_baseline = nn_baseline
 
         if self.discrete:
-            self.logits_na = ptu.build_mlp(input_size=self.ob_dim,
-                                           output_size=self.ac_dim,
-                                           n_layers=self.n_layers,
-                                           size=self.size)
+            self.logits_na = ptu.build_mlp(
+                input_size=self.ob_dim,
+                output_size=self.ac_dim,
+                n_layers=self.n_layers,
+                size=self.size,
+            )
             self.logits_na.to(ptu.device)
             self.mean_net = None
             self.logstd = None
@@ -50,12 +52,15 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
                                         self.learning_rate)
         else:
             self.logits_na = None
-            self.mean_net = ptu.build_mlp(input_size=self.ob_dim,
-                                          output_size=self.ac_dim,
-                                          n_layers=self.n_layers, size=self.size)
+            self.mean_net = ptu.build_mlp(
+                input_size=self.ob_dim,
+                output_size=self.ac_dim,
+                n_layers=self.n_layers, size=self.size,
+            )
             self.mean_net.to(ptu.device)
             self.logstd = nn.Parameter(
-                torch.zeros(self.ac_dim, dtype=torch.float32))
+                torch.zeros(self.ac_dim, dtype=torch.float32, device=ptu.device)
+            )
             self.logstd.to(ptu.device)
             self.optimizer = optim.Adam(
                 itertools.chain([self.logstd], self.mean_net.parameters()),
