@@ -110,4 +110,7 @@ class MLPPolicySL(MLPPolicy):
     ):
         # TODO: update the policy and return the loss
         loss = TODO
-        return ptu.to_numpy(loss)
+        return {
+            # You can add extra logging information here, but keep this line
+            'Training Loss': ptu.to_numpy(loss),
+        }
