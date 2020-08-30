@@ -89,15 +89,17 @@ def main():
     ### CREATE DIRECTORY FOR LOGGING
     ##################################
 
-    logdir_prefix = 'bc_'
     if args.do_dagger:
-        logdir_prefix = 'dagger_'
+        # Use this prefix when submitting. The auto-grader uses this prefix.
+        logdir_prefix = 'q1_dagger_'
         assert args.n_iter>1, ('DAGGER needs more than 1 iteration (n_iter>1) of training, to iteratively query the expert and train (after 1st warmstarting from behavior cloning).')
     else:
+        # Use this prefix when submitting. The auto-grader uses this prefix.
+        logdir_prefix = 'q1_bc_'
         assert args.n_iter==1, ('Vanilla behavior cloning collects expert data just once (n_iter=1)')
 
     ## directory for logging
-    data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data')
+    data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../data')
     if not (os.path.exists(data_path)):
         os.makedirs(data_path)
     logdir = logdir_prefix + args.exp_name + '_' + args.env_name + '_' + time.strftime("%d-%m-%Y_%H-%M-%S")

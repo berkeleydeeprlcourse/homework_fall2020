@@ -25,37 +25,52 @@ See the homework pdf for more details.
 
 ## Run the code
 
-Tip: While debugging, you probably want to pass the flag `--video_log_freq -1` which will disable video logging and speed up the experiment.
+Tip: While debugging, you probably want to keep the flag `--video_log_freq -1` which will disable video logging and speed up the experiment. However, feel free to remove it to save videos of your awesome policy!
 
-Run the following command for Section 1 (Behavior Cloning):
+If running on Colab, adjust the `#@params` in the `Args` class according to the commmand line arguments above.
+
+### Section 1 (Behavior Cloning)
+Command for problem 1:
 
 ```
-python cs285/scripts/run_hw1_behavior_cloning.py \
+python cs285/scripts/run_hw1.py \
 	--expert_policy_file cs285/policies/experts/Ant.pkl \
-	--env_name Ant-v2 --exp_name test_bc_ant --n_iter 1 \
-	--expert_data cs285/expert_data/expert_data_Ant-v2.pkl
+	--env_name Ant-v2 --exp_name ant --n_iter 1 \
+	--expert_data cs285/expert_data/expert_data_Ant-v2.pkl \
+	--video_log_freq -1
 ```
 
-Run the following command for Section 2 (DAgger):
+Make sure to also try another environment.
+See the homework PDF for more details on what else you need to run.
+
+### Section 2 (DAgger)
+Command for section 1:
 (Note the `--do_dagger` flag, and the higher value for `n_iter`)
 
 ```
-python cs285/scripts/run_hw1_behavior_cloning.py \
-	--expert_policy_file cs285/policies/experts/Ant.pkl \
-	--env_name Ant-v2 --exp_name test_dagger_ant --n_iter 10 \
-	--do_dagger --expert_data cs285/expert_data/expert_data_Ant-v2.pkl
+python cs285/scripts/run_hw1.py \
+    --expert_policy_file cs285/policies/experts/Ant.pkl \
+    --env_name Ant-v2 --exp_name ant --n_iter 10 \
+    --do_dagger --expert_data cs285/expert_data/expert_data_Ant-v2.pkl \
+	--video_log_freq -1
 ```
 
-If running on Colab, adjust the `#@params` in the `Args` class according to the commmand line arguments above.
+Make sure to also try another environment.
+See the homework PDF for more details on what else you need to run.
 
 ## Visualization the saved tensorboard event file:
 
 You can visualize your runs using tensorboard:
 ```
-tensorboard --logdir cs285/data
+tensorboard --logdir data
 ```
 
 You will see scalar summaries as well as videos of your trained policies (in the 'images' tab).
+
+You can choose to visualize specific runs with a comma-separated list:
+```
+tensorboard --logdir data/run1,data/run2,data/run3...
+```
 
 If running on Colab, you will be using the `%tensorboard` [line magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html) to do the same thing; see the [notebook](cs285/scripts/run_hw1.ipynb) for more details.
 
