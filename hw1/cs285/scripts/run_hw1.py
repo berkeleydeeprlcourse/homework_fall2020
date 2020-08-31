@@ -93,11 +93,11 @@ def main():
 
     if args.do_dagger:
         # Use this prefix when submitting. The auto-grader uses this prefix.
-        logdir_prefix = 'dagger_'
+        logdir_prefix = 'q2_'
         assert args.n_iter>1, ('DAGGER needs more than 1 iteration (n_iter>1) of training, to iteratively query the expert and train (after 1st warmstarting from behavior cloning).')
     else:
         # Use this prefix when submitting. The auto-grader uses this prefix.
-        logdir_prefix = 'bc_'
+        logdir_prefix = 'q1_'
         assert args.n_iter==1, ('Vanilla behavior cloning collects expert data just once (n_iter=1)')
 
     ## directory for logging
