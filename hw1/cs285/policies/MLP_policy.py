@@ -15,18 +15,17 @@ from cs285.policies.base_policy import BasePolicy
 
 class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 
-    def __init__(
-            self,
-            ac_dim,
-            ob_dim,
-            n_layers,
-            size,
-            discrete=False,
-            learning_rate=1e-4,
-            training=True,
-            nn_baseline=False,
-            **kwargs
-    ):
+    def __init__(self,
+                 ac_dim,
+                 ob_dim,
+                 n_layers,
+                 size,
+                 discrete=False,
+                 learning_rate=1e-4,
+                 training=True,
+                 nn_baseline=False,
+                 **kwargs
+                 ):
         super().__init__(**kwargs)
 
         # init vars
@@ -40,10 +39,12 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
         self.nn_baseline = nn_baseline
 
         if self.discrete:
-            self.logits_na = ptu.build_mlp(input_size=self.ob_dim,
-                                           output_size=self.ac_dim,
-                                           n_layers=self.n_layers,
-                                           size=self.size)
+            self.logits_na = ptu.build_mlp(
+                input_size=self.ob_dim,
+                output_size=self.ac_dim,
+                n_layers=self.n_layers,
+                size=self.size,
+            )
             self.logits_na.to(ptu.device)
             self.mean_net = None
             self.logstd = None
@@ -51,9 +52,11 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
                                         self.learning_rate)
         else:
             self.logits_na = None
-            self.mean_net = ptu.build_mlp(input_size=self.ob_dim,
-                                          output_size=self.ac_dim,
-                                          n_layers=self.n_layers, size=self.size)
+            self.mean_net = ptu.build_mlp(
+                input_size=self.ob_dim,
+                output_size=self.ac_dim,
+                n_layers=self.n_layers, size=self.size,
+            )
             self.mean_net.to(ptu.device)
             self.logstd = nn.Parameter(
                 torch.zeros(self.ac_dim, dtype=torch.float32, device=ptu.device)
@@ -81,8 +84,7 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     # update/train this policy
-    def update(self, obs: np.ndarray, acs: np.ndarray, **kwargs) -> dict:
-        """Return a dictionary of logging information."""
+    def update(self, observations, actions, **kwargs):
         raise NotImplementedError
 
     # This function defines the forward pass of the network.

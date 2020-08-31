@@ -1,17 +1,17 @@
-import time
 from collections import OrderedDict
-import pickle
 import numpy as np
-import tensorflow as tf
+import time
+
 import gym
-import os
+import torch
 
 from cs285.infrastructure import pytorch_util as ptu
 from cs285.infrastructure.logger import Logger
+from cs285.infrastructure import utils
 
-# params for saving rollout videos to tensorboard
+# how many rollouts to save as videos to tensorboard
 MAX_NVIDEO = 2
-MAX_VIDEO_LEN = 40
+MAX_VIDEO_LEN = 40  # we overwrite this in the code below
 
 
 class RL_Trainer(object):
@@ -25,11 +25,9 @@ class RL_Trainer(object):
         # Get params, create logger, create TF session
         self.params = params
         self.logger = Logger(self.params['logdir'])
-        self.sess = create_tf_session(self.params['use_gpu'], which_gpu=self.params['which_gpu'])
 
         # Set random seeds
         seed = self.params['seed']
-        tf.set_random_seed(seed)
         np.random.seed(seed)
         torch.manual_seed(seed)
         ptu.init_gpu(
@@ -47,6 +45,7 @@ class RL_Trainer(object):
 
         # Maximum length for episodes
         self.params['ep_len'] = self.params['ep_len'] or self.env.spec.max_episode_steps
+        MAX_VIDEO_LEN = self.params['ep_len']
 
         # Is this env continuous, or self.discrete?
         discrete = isinstance(self.env.action_space, gym.spaces.Discrete)
@@ -69,15 +68,7 @@ class RL_Trainer(object):
         #############
 
         agent_class = self.params['agent_class']
-        self.agent = agent_class(self.sess, self.env, self.params['agent_params'])
-
-        #############
-        ## INIT VARS
-        #############
-
-        ## TODO initialize all of the TF variables (that were created by agent, etc.)
-        ## HINT: use global_variables_initializer
-        TODO
+        self.agent = agent_class(self.env, self.params['agent_params'])
 
     def run_training_loop(self, n_iter, collect_policy, eval_policy,
                         initial_expertdata=None, relabel_with_expert=False,
@@ -139,9 +130,9 @@ class RL_Trainer(object):
                 self.perform_logging(
                     itr, paths, eval_policy, train_video_paths, training_logs)
 
-                # save policy
-                print('\nSaving agent\'s actor...')
-                self.agent.actor.save(self.params['logdir'] + '/policy_itr_'+str(itr))
+                if self.params['save_params']:
+                    print('\nSaving agent params')
+                    self.agent.save('{}/policy_itr_{}.pt'.format(self.params['logdir'], itr))
 
     ####################################
     ####################################
@@ -164,7 +155,7 @@ class RL_Trainer(object):
             train_video_paths: paths which also contain videos for visualization purposes
         """
 
-        # TODO decide whether to load training data or rollout with `collect_policy`
+        # TODO decide whether to load training data or use
         # HINT: depending on if it's the first iteration or not,
             # decide whether to either
                 # load the data. In this case you can directly return as follows
@@ -185,7 +176,7 @@ class RL_Trainer(object):
         if self.log_video:
             print('\nCollecting train rollouts to be used for saving videos...')
             ## TODO look in utils and implement sample_n_trajectories
-            train_video_paths = sample_n_trajectories(self.env, collect_policy, MAX_NVIDEO, MAX_VIDEO_LEN, True)
+            train_video_paths = utils.sample_n_trajectories(self.env, collect_policy, MAX_NVIDEO, MAX_VIDEO_LEN, True)
 
         return paths, envsteps_this_batch, train_video_paths
 
@@ -223,12 +214,12 @@ class RL_Trainer(object):
 
         # collect eval trajectories, for logging
         print("\nCollecting data for eval...")
-        eval_paths, eval_envsteps_this_batch = sample_trajectories(self.env, eval_policy, self.params['eval_batch_size'], self.params['ep_len'])
+        eval_paths, eval_envsteps_this_batch = utils.sample_trajectories(self.env, eval_policy, self.params['eval_batch_size'], self.params['ep_len'])
 
         # save eval rollouts as videos in tensorboard event file
         if self.log_video and train_video_paths != None:
             print('\nCollecting video rollouts eval')
-            eval_video_paths = sample_n_trajectories(self.env, eval_policy, MAX_NVIDEO, MAX_VIDEO_LEN, True)
+            eval_video_paths = utils.sample_n_trajectories(self.env, eval_policy, MAX_NVIDEO, MAX_VIDEO_LEN, True)
 
             #save train/eval videos
             print('\nSaving train rollouts as videos...')
