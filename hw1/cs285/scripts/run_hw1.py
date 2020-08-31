@@ -23,14 +23,14 @@ class BC_Trainer(object):
             }
 
         self.params = params
-        self.params['agent_class'] = BCAgent ## TODO: look in here and implement this
+        self.params['agent_class'] = BCAgent ## HW1: you will modify this
         self.params['agent_params'] = agent_params
 
         ################
         ## RL TRAINER
         ################
 
-        self.rl_trainer = RL_Trainer(self.params) ## TODO: look in here and implement this
+        self.rl_trainer = RL_Trainer(self.params) ## HW1: you will modify this
 
         #######################
         ## LOAD EXPERT POLICY
@@ -67,7 +67,7 @@ def main():
 
     parser.add_argument('--batch_size', type=int, default=1000)  # training data collected (in the env) during each iteration
     parser.add_argument('--eval_batch_size', type=int,
-                        default=200)  # eval data collected (in the env) for logging metrics
+                        default=1000)  # eval data collected (in the env) for logging metrics
     parser.add_argument('--train_batch_size', type=int,
                         default=100)  # number of sampled data points to be used per gradient/train step
 
@@ -77,9 +77,10 @@ def main():
 
     parser.add_argument('--video_log_freq', type=int, default=5)
     parser.add_argument('--scalar_log_freq', type=int, default=1)
-    parser.add_argument('--use_gpu', action='store_true')
+    parser.add_argument('--no_gpu', '-ngpu', action='store_true')
     parser.add_argument('--which_gpu', type=int, default=0)
     parser.add_argument('--max_replay_buffer_size', type=int, default=1000000)
+    parser.add_argument('--save_params', action='store_true')
     parser.add_argument('--seed', type=int, default=1)
     args = parser.parse_args()
 
@@ -90,15 +91,17 @@ def main():
     ### CREATE DIRECTORY FOR LOGGING
     ##################################
 
-    logdir_prefix = 'bc_'
     if args.do_dagger:
+        # Use this prefix when submitting. The auto-grader uses this prefix.
         logdir_prefix = 'dagger_'
         assert args.n_iter>1, ('DAGGER needs more than 1 iteration (n_iter>1) of training, to iteratively query the expert and train (after 1st warmstarting from behavior cloning).')
     else:
+        # Use this prefix when submitting. The auto-grader uses this prefix.
+        logdir_prefix = 'bc_'
         assert args.n_iter==1, ('Vanilla behavior cloning collects expert data just once (n_iter=1)')
 
     ## directory for logging
-    data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data')
+    data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../data')
     if not (os.path.exists(data_path)):
         os.makedirs(data_path)
     logdir = logdir_prefix + args.exp_name + '_' + args.env_name + '_' + time.strftime("%d-%m-%Y_%H-%M-%S")

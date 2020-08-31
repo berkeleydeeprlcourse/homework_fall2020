@@ -6,13 +6,13 @@ import tensorflow as tf
 import gym
 import os
 
-from cs285.infrastructure.utils import *
-from cs285.infrastructure.tf_utils import create_tf_session
+from cs285.infrastructure import pytorch_util as ptu
 from cs285.infrastructure.logger import Logger
 
 # params for saving rollout videos to tensorboard
 MAX_NVIDEO = 2
 MAX_VIDEO_LEN = 40
+
 
 class RL_Trainer(object):
 
@@ -31,6 +31,11 @@ class RL_Trainer(object):
         seed = self.params['seed']
         tf.set_random_seed(seed)
         np.random.seed(seed)
+        torch.manual_seed(seed)
+        ptu.init_gpu(
+            use_gpu=not self.params['no_gpu'],
+            gpu_id=self.params['which_gpu']
+        )
 
         #############
         ## ENV
@@ -107,28 +112,32 @@ class RL_Trainer(object):
                 self.log_metrics = False
 
             # collect trajectories, to be used for training
-            training_returns = self.collect_training_trajectories(itr,
-                                initial_expertdata, collect_policy,
-                                self.params['batch_size']) ## TODO implement this function below
+            training_returns = self.collect_training_trajectories(
+                itr,
+                initial_expertdata,
+                collect_policy,
+                self.params['batch_size']
+            )  # HW1: implement this function below
             paths, envsteps_this_batch, train_video_paths = training_returns
             self.total_envsteps += envsteps_this_batch
 
             # relabel the collected obs with actions from a provided expert policy
             if relabel_with_expert and itr>=start_relabel_with_expert:
-                paths = self.do_relabel_with_expert(expert_policy, paths) ## TODO implement this function below
+                paths = self.do_relabel_with_expert(expert_policy, paths)  # HW1: implement this function below
 
             # add collected data to replay buffer
             self.agent.add_to_replay_buffer(paths)
 
             # train agent (using sampled data from replay buffer)
-            self.train_agent() ## TODO implement this function below
+            training_logs = self.train_agent()  # HW1: implement this function below
 
             # log/save
             if self.log_video or self.log_metrics:
 
                 # perform logging
                 print('\nBeginning logging procedure...')
-                self.perform_logging(itr, paths, eval_policy, train_video_paths)
+                self.perform_logging(
+                    itr, paths, eval_policy, train_video_paths, training_logs)
 
                 # save policy
                 print('\nSaving agent\'s actor...')
@@ -137,7 +146,13 @@ class RL_Trainer(object):
     ####################################
     ####################################
 
-    def collect_training_trajectories(self, itr, load_initial_expertdata, collect_policy, batch_size):
+    def collect_training_trajectories(
+            self,
+            itr,
+            load_initial_expertdata,
+            collect_policy,
+            batch_size,
+    ):
         """
         :param itr:
         :param load_initial_expertdata:  path to expert data pkl file
@@ -155,9 +170,10 @@ class RL_Trainer(object):
                 # load the data. In this case you can directly return as follows
                 # ``` return loaded_paths, 0, None ```
 
-                # collect data. `batch_size` is the number of transitions you want to collect.
+                # if it's the first iteration and you aren't loading data, then
+                # `self.params['batch_size_initial']` is the number of transitions you want to collect
 
-        # TODO collect data to be used for training
+        # TODO collect `batch_size` samples to be used for training
         # HINT1: use sample_trajectories from utils
         # HINT2: you want each of these collected rollouts to be of length self.params['ep_len']
         print("\nCollecting data to be used for training...")
@@ -176,6 +192,7 @@ class RL_Trainer(object):
 
     def train_agent(self):
         print('\nTraining agent using sampled data from replay buffer...')
+        all_logs = []
         for train_step in range(self.params['num_agent_train_steps_per_iter']):
 
             # TODO sample some data from the data buffer
@@ -183,9 +200,12 @@ class RL_Trainer(object):
             # HINT2: how much data = self.params['train_batch_size']
             ob_batch, ac_batch, re_batch, next_ob_batch, terminal_batch = TODO
 
-            # TODO use the sampled data for training
+            # TODO use the sampled data to train an agent
             # HINT: use the agent's train function
-            # HINT: print or plot the loss for debugging!
+            # HINT: keep the agent's training log for debugging
+            train_log = TODO
+            all_logs.append(train_log)
+        return all_logs
 
     def do_relabel_with_expert(self, expert_policy, paths):
         print("\nRelabelling collected observations with labels from an expert policy...")
@@ -199,7 +219,7 @@ class RL_Trainer(object):
     ####################################
     ####################################
 
-    def perform_logging(self, itr, paths, eval_policy, train_video_paths):
+    def perform_logging(self, itr, paths, eval_policy, train_video_paths, training_logs):
 
         # collect eval trajectories, for logging
         print("\nCollecting data for eval...")
@@ -243,6 +263,8 @@ class RL_Trainer(object):
 
             logs["Train_EnvstepsSoFar"] = self.total_envsteps
             logs["TimeSinceStart"] = time.time() - self.start_time
+            last_log = training_logs[-1]  # Only use the last log for now
+            logs.update(last_log)
 
 
             if itr == 0:
