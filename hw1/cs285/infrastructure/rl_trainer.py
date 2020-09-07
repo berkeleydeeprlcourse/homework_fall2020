@@ -160,7 +160,7 @@ class RL_Trainer(object):
                 # (1) load the data. In this case you can directly return as follows
                 # ``` return loaded_paths, 0, None ```
 
-                # (2) collect `self.params['batch_size_initial']` transitions
+                # (2) collect `self.params['batch_size']` transitions
 
         # TODO collect `batch_size` samples to be used for training
         # HINT1: use sample_trajectories from utils
