@@ -155,14 +155,12 @@ class RL_Trainer(object):
             train_video_paths: paths which also contain videos for visualization purposes
         """
 
-        # TODO decide whether to load training data or use
-        # HINT: depending on if it's the first iteration or not,
-            # decide whether to either
-                # load the data. In this case you can directly return as follows
+        # TODO decide whether to load training data or use the current policy to collect more data
+        # HINT: depending on if it's the first iteration or not, decide whether to either
+                # (1) load the data. In this case you can directly return as follows
                 # ``` return loaded_paths, 0, None ```
 
-                # if it's the first iteration and you aren't loading data, then
-                # `self.params['batch_size_initial']` is the number of transitions you want to collect
+                # (2) collect `self.params['batch_size']` transitions
 
         # TODO collect `batch_size` samples to be used for training
         # HINT1: use sample_trajectories from utils

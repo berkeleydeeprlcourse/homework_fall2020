@@ -14,7 +14,7 @@ Fill in sections marked with `TODO`. In particular, see
  - [policies/MLP_policy.py](cs285/policies/MLP_policy.py)
  - [infrastructure/replay_buffer.py](cs285/infrastructure/replay_buffer.py)
  - [infrastructure/utils.py](cs285/infrastructure/utils.py)
- - [infrastructure/pytorch_utils.py](cs285/infrastructure/pytorch_utils.py)
+ - [infrastructure/pytorch_util.py](cs285/infrastructure/pytorch_util.py)
 
 Look for sections maked with `HW1` to see how the edits you make will be used.
 Some other files that you may find relevant
