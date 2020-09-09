@@ -38,7 +38,7 @@ def build_mlp(
             output_activation: activation of the output layer
 
         returns:
-            output_placeholder: the result of a forward pass through the hidden layers + the output layer
+            MLP (nn.Module)
     """
     if isinstance(activation, str):
         activation = _str_to_activation[activation]
