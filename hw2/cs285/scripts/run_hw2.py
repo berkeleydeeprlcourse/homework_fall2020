@@ -85,11 +85,14 @@ def main():
     # convert to dictionary
     params = vars(args)
 
+    ## ensure compatibility with hw1 code
+    params['train_batch_size'] = params['batch_size']
+
     ##################################
     ### CREATE DIRECTORY FOR LOGGING
     ##################################
 
-    data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data')
+    data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../data')
 
     if not (os.path.exists(data_path)):
         os.makedirs(data_path)
@@ -103,9 +106,6 @@ def main():
     ###################
     ### RUN TRAINING
     ###################
-
-    ## ensure compatibility with hw1 code
-    params['train_batch_size'] = params['batch_size']
 
     trainer = PG_Trainer(params)
     trainer.run_training_loop()
