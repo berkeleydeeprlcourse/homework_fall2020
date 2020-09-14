@@ -14,7 +14,6 @@ def get_section_results(file):
 
 if __name__ == '__main__':
     import glob
-    import pdb
 
     logdir = 'cs285/data/q1_lb_rtg_na_CartPole-v0_13-09-2020_23-32-10/events*'
     eventfile = glob.glob(logdir)[0]
