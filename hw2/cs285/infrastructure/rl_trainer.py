@@ -149,8 +149,9 @@ class RL_Trainer(object):
     ####################################
     ####################################
 
-    def collect_training_trajectories(self, itr, initial_expertdata, collect_policy, num_transitions_to_sample, save_expert_data_to_disk=False):
+    def collect_training_trajectories(self, itr, load_initial_expertdata, collect_policy, batch_size):
         # TODO: get this from hw1
+        # if your load_initial_expertdata is None, then you need to collect new trajectories at *every* iteration
         return paths, envsteps_this_batch, train_video_paths
 
     def train_agent(self):
