@@ -30,7 +30,7 @@ and in the following files for part 2 (actor-critic):
 
 The relevant sections are marked with `TODO`.
 
-You may also want to look through [run_hw3_dqn.py](cs285/scripts/run_hw3_dqn.py) and [run_hw3_actor_critic](cs285/scripts/run_hw3_actor_critic.py) (if running locally) or [run_hw3_dqn.ipynb](cs285/scripts/run_hw3.ipynb) and [run_hw3_actor_critic.ipynb](cs285/scripts/run_hw3_actor_critic.ipynb) (if running on Colab), though you will not need to edit this files beyond changing runtime arguments in the Colab notebook.
+You may also want to look through [run_hw3_dqn.py](cs285/scripts/run_hw3_dqn.py) and [run_hw3_actor_critic.py](cs285/scripts/run_hw3_actor_critic.py) (if running locally) or [run_hw3_dqn.ipynb](cs285/scripts/run_hw3.ipynb) and [run_hw3_actor_critic.ipynb](cs285/scripts/run_hw3_actor_critic.ipynb) (if running on Colab), though you will not need to edit this files beyond changing runtime arguments in the Colab notebook.
 
 See the [assignment PDF](cs285_hw3.pdf) for more details on what files to edit.
 
