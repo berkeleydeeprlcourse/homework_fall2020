@@ -55,14 +55,14 @@ def mean_squared_error(a, b):
 ############################################
 
 def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('rgb_array')):
-    # TODO: get this from hw1 or hw2
+    # TODO: get this from Piazza
 
 def sample_trajectories(env, policy, min_timesteps_per_batch, max_path_length, render=False, render_mode=('rgb_array')):
     """
         Collect rollouts using policy
         until we have collected min_timesteps_per_batch steps
     """
-    # TODO: get this from hw1 or hw2
+    # TODO: get this from Piazza
 
     return paths, timesteps_this_batch
 
@@ -70,7 +70,7 @@ def sample_n_trajectories(env, policy, ntraj, max_path_length, render=False, ren
     """
         Collect ntraj rollouts using policy
     """
-    # TODO: get this from hw1 or hw2
+    # TODO: get this from Piazza
 
     return paths
 
