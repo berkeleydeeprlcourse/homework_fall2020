@@ -1,8 +1,3 @@
-1) See hw1 if you'd like to see installation instructions. You do NOT have to redo them.
-2) See the PDF for the rest of the instructions.
-3) For this particular assignment, you will need to install networkx==2.5
-
-
 ## Setup
 
 You can run this code on your own machine or on Google Colab. 
@@ -32,3 +27,5 @@ The relevant sections are marked with `TODO`.
 You may also want to look through [scripts/run_hw5_expl.py](cs285/scripts/run_hw5_expl.py) (if running locally) or [scripts/run_hw5_expl.ipynb](cs285/scripts/run_hw5_expl.ipynb) (if running on Colab), though you will not need to edit this files beyond changing runtime arguments in the Colab notebook.
 
 See the [assignment PDF](cs285_hw5.pdf) for more details on what files to edit.
+
+For this particular assignment, you will need to install networkx==2.5
