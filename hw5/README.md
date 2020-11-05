@@ -12,7 +12,7 @@ You can run this code on your own machine or on Google Colab.
 
 The following files have blanks to be filled with your solutions from homework 1 and 3. The relevant sections are marked with `TODO: get this from Piazza'.
 
-- [infrastruction/utils.py](cs285/cs285/infrastructure/utils.py)
+- [infrastructure/utils.py](cs285/cs285/infrastructure/utils.py)
 - [infrastructure/rl_trainer.py](cs285/infrastructure/rl_trainer.py)
 - [policies/MLP_policy.py](cs285/policies/MLP_policy.py)
 - [policies/argmax_policy.py](cs285/policies/argmax_policy.py)
@@ -24,8 +24,8 @@ You will then need to implement code in the following files:
 
 The relevant sections are marked with `TODO`.
 
-You may also want to look through [scripts/run_hw5_expl.py](cs285/scripts/run_hw5_expl.py) (if running locally) or [scripts/run_hw5_expl.ipynb](cs285/scripts/run_hw5_expl.ipynb) (if running on Colab), though you will not need to edit this files beyond changing runtime arguments in the Colab notebook.
+You may also want to look through [scripts/run_hw5_expl.py](cs285/scripts/run_hw5_expl.py) (if running locally) or [run_hw5_expl.ipynb](cs285/run_hw5_expl.ipynb) (if running on Colab), though you will not need to edit this files beyond changing runtime arguments in the Colab notebook.
 
-See the [assignment PDF](cs285_hw5.pdf) for more details on what files to edit.
+See the [assignment PDF](hw5.pdf) for more details on what files to edit.
 
 For this particular assignment, you will need to install networkx==2.5
