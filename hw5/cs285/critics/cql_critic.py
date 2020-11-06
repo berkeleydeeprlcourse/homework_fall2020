@@ -84,7 +84,7 @@ class CQLCritic(BaseCritic):
             )
         
         # CQL Loss
-        if self.cql_alpha >= 0:
+        if self.cql_alpha > 0:
             # TODO: Implement CQL as described in the pdf and paper
 
         self.optimizer.zero_grad()
