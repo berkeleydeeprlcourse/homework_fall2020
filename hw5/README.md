@@ -16,6 +16,7 @@ The following files have blanks to be filled with your solutions from homework 1
 - [infrastructure/rl_trainer.py](cs285/infrastructure/rl_trainer.py)
 - [policies/MLP_policy.py](cs285/policies/MLP_policy.py)
 - [policies/argmax_policy.py](cs285/policies/argmax_policy.py)
+- [critics/dqn_critic.py](cs285/critics/dqn_critic.py)
 
 You will then need to implement code in the following files:
 - [exploration/rnd_model.py](cs285/exploration/rnd_model.py)
