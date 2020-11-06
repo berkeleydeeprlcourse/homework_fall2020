@@ -58,7 +58,7 @@ class DQNCritic(BaseCritic):
                 nothing
         """
         raise NotImplementedError
-        # Not needed for this homework
+        # TODO: Get this from homework 3
 
     ####################################
     ####################################
