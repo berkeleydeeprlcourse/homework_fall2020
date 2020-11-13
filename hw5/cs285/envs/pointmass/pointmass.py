@@ -336,7 +336,12 @@ class Pointmass(gym.Env):
     self.num_runs = 0
     self.reset()
 
-  def reset(self):
+  def seed(self, seed):
+    np.random.seed(seed)
+    
+  def reset(self, seed=None):
+    if seed: self.seed(seed)
+        
     if len(self.obs_vec) > 0:
       self.last_trajectory = self.plot_trajectory()
     
