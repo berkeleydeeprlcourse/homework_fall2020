@@ -43,7 +43,6 @@ class RNDModel(nn.Module, BaseExplorationModel):
             self.optimizer_spec.learning_rate_schedule,
         )
 
-        self.loss = nn.MSELoss() 
         self.f.to(ptu.device)
         self.f_hat.to(ptu.device)
 
@@ -60,5 +59,6 @@ class RNDModel(nn.Module, BaseExplorationModel):
 
     def update(self, ob_no):
         # TODO: Update f_hat using ob_no
+        # Hint: Take the mean prediction error across the batch
         loss = None
         return loss.item()
