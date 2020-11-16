@@ -113,7 +113,7 @@ def get_env_kwargs(env_name):
             'target_update_freq': 300,
             'grad_norm_clipping': 10,
             'lander': False,
-            'num_timesteps': 500000,
+            'num_timesteps': 50000,
             'env_wrappers': pointmass_empty_wrapper
         }
         kwargs['exploration_schedule'] = lander_exploration_schedule(kwargs['num_timesteps'])
